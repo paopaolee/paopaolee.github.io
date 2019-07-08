@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="paopaolee">
 <meta property="og:description" content="“Programmers are in a race with the Universe to create bigger and better idiot-proof programs, while the Universe is trying to create bigger and better idiots.  So far the Universe is winning.”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-08T03:50:20.355Z">
+<meta property="og:updated_time" content="2019-07-08T06:18:50.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS进阶—— bind函数">
 <meta name="twitter:description" content="“Programmers are in a race with the Universe to create bigger and better idiot-proof programs, while the Universe is trying to create bigger and better idiots.  So far the Universe is winning.”">
@@ -176,14 +176,12 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta custom-logo">
+  <div class="site-meta">
     
 
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">paopaolee</span>
-        <span class="logo-line-after"><i></i></span>
+          <img class="header-custom-logo" src="/uploads/paopaolee-logo.png" alt="paopaolee">
       </a>
     </div>
     
@@ -356,7 +354,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="paopaolee">
       <meta itemprop="description" content="记录IT路上的风风雨雨-paopaolee">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -409,7 +407,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-08 11:50:20" itemprop="dateModified" datetime="2019-07-08T11:50:20+08:00">2019-07-08</time>
+                <time title="Modified: 2019-07-08 14:18:50" itemprop="dateModified" datetime="2019-07-08T14:18:50+08:00">2019-07-08</time>
               </span>
             
           
@@ -429,6 +427,25 @@
                 
               
             </span>
+          
+
+          
+             <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                <span class="post-count">1.5k word</span>
+              </span>
+          
+
+
+          
+             <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <span class="post-count">6 mins</span>
+              </span>
           
 
           
@@ -498,7 +515,7 @@
 <p>实现</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.paopaoleeBind = <span class="function"><span class="keyword">function</span> (<span class="params">Othat</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> slice = <span class="built_in">Array</span>.prototype.slice;</span><br><span class="line">  <span class="keyword">var</span> toString = <span class="built_in">Array</span>.portotype.toString;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="comment">// 解决: 非法调用</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> self !=== <span class="string">'function'</span> || toString(self) !== [object <span class="built_in">Function</span>])&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"incorrectly call"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> args = slice(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">boundFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断this是否为boundFunc实例，如果是说明是new构造函数调用，否则是普通调用</span></span><br><span class="line">    <span class="keyword">var</span> Othis = <span class="keyword">this</span> <span class="keyword">instanceof</span> boundFunc ? <span class="keyword">this</span> : Othat;</span><br><span class="line">    <span class="comment">// 解决: 新函数执行时return返回值</span></span><br><span class="line">    <span class="keyword">return</span> self.apply(Othis, args.concat(slice.call(<span class="built_in">arguments</span>)));   <span class="comment">// 解决: 新函数执行可接受参数</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> boundFunc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="第五版"><a href="#第五版" class="headerlink" title="第五版"></a>第五版</h4><p>问题： 第四版中，我们解决了特征四，但是使用new操作符创建对象时，this指向的是boundFunc的实例，无法继承原函数的原型中的属性，原型链遭到破坏。</p>
+<h4 id="第四版"><a href="#第四版" class="headerlink" title="第四版"></a>第四版</h4><p>问题： 第三版中，我们解决了bind函数的第4个特征，但是使用new操作符创建对象时，this指向的是boundFunc的实例，无法继承原函数的原型中的属性，原型链遭到破坏。</p>
 <p>目标：重塑原型链</p>
 <p>实现：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.paopaoleeBind = <span class="function"><span class="keyword">function</span> (<span class="params">Othat</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> slice = <span class="built_in">Array</span>.prototype.slice;</span><br><span class="line">  <span class="keyword">var</span> toString = <span class="built_in">Array</span>.portotype.toString;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="comment">// 解决: 非法调用</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> self !=== <span class="string">'function'</span> || toString(self) !== [object <span class="built_in">Function</span>])&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"incorrectly call"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> args = slice(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">boundFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断this是否为boundFunc实例，如果是说明是new构造函数调用，否则是普通调用</span></span><br><span class="line">    <span class="keyword">var</span> Othis = <span class="keyword">this</span> <span class="keyword">instanceof</span> boundFunc ? <span class="keyword">this</span> : Othat;</span><br><span class="line">    <span class="comment">// 解决: 新函数执行时return返回值</span></span><br><span class="line">    <span class="keyword">return</span> self.apply(Othis, args.concat(slice.call(<span class="built_in">arguments</span>)));   <span class="comment">// 解决: 新函数执行可接受参数</span></span><br><span class="line">  &#125;</span><br><span class="line">  boundFunc.prototype = <span class="keyword">this</span>.portotype;</span><br><span class="line">  <span class="keyword">return</span> boundFunc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -595,7 +612,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="paopaolee">
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="paopaolee">
             
               <p class="site-author-name" itemprop="name">paopaolee</p>
               <div class="site-description motion-element" itemprop="description">记录IT路上的风风雨雨-paopaolee</div>
@@ -684,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方描述"><span class="nav-number">1.</span> <span class="nav-text">官方描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用例说明"><span class="nav-number">2.</span> <span class="nav-text">用例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动手实现"><span class="nav-number">3.</span> <span class="nav-text">动手实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一版"><span class="nav-number">3.1.</span> <span class="nav-text">第一版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二版"><span class="nav-number">3.2.</span> <span class="nav-text">第二版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三版"><span class="nav-number">3.3.</span> <span class="nav-text">第三版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五版"><span class="nav-number">3.4.</span> <span class="nav-text">第五版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最终版"><span class="nav-number">3.5.</span> <span class="nav-text">最终版</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方描述"><span class="nav-number">1.</span> <span class="nav-text">官方描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用例说明"><span class="nav-number">2.</span> <span class="nav-text">用例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动手实现"><span class="nav-number">3.</span> <span class="nav-text">动手实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一版"><span class="nav-number">3.1.</span> <span class="nav-text">第一版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二版"><span class="nav-number">3.2.</span> <span class="nav-text">第二版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三版"><span class="nav-number">3.3.</span> <span class="nav-text">第三版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四版"><span class="nav-number">3.4.</span> <span class="nav-text">第四版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最终版"><span class="nav-number">3.5.</span> <span class="nav-text">最终版</span></a></li></ol></li></ol></div>
             
 
           </div>

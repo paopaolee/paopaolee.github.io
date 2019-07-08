@@ -1131,6 +1131,9 @@ pre .javascript .function {
   position: relative;
   top: -10px;
 }
+.use-motion .header-custom-logo {
+  width: 120px;
+}
 .site-nav-toggle {
   display: none;
   position: absolute;
@@ -1143,7 +1146,7 @@ pre .javascript .function {
   }
 }
 .site-nav-toggle button {
-  margin-top: 2px;
+  margin-top: 10px;
   padding: 9px 10px;
   background: transparent;
   border: none;
@@ -1731,7 +1734,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fa344f;
+  background: #2fa8ff;
 }
 .feed-link,
 .chat {
@@ -2336,7 +2339,7 @@ hr {
   background: #f5f5f5;
 }
 .header-inner {
-  padding: 20px 0;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: center;
