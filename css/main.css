@@ -1132,7 +1132,7 @@ pre .javascript .function {
   top: -10px;
 }
 .use-motion .header-custom-logo {
-  width: 120px;
+  width: 100px;
 }
 .site-nav-toggle {
   display: none;
@@ -1734,7 +1734,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2fa8ff;
+  background: #fd4;
 }
 .feed-link,
 .chat {
