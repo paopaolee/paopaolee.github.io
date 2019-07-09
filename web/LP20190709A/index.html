@@ -103,7 +103,7 @@
 <meta property="og:description" content="“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g4tpdqiqwvj317n0u0djs.jpg">
-<meta property="og:updated_time" content="2019-07-09T09:29:17.491Z">
+<meta property="og:updated_time" content="2019-07-09T09:49:10.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漫谈Web--JWT">
 <meta name="twitter:description" content="“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski">
@@ -394,7 +394,7 @@
                 
               
 
-              <time title="Created: 2019-07-09 16:29:27 / Modified: 17:29:17" itemprop="dateCreated datePublished" datetime="2019-07-09T16:29:27+08:00">2019-07-09</time>
+              <time title="Created: 2019-07-09 16:29:27 / Modified: 17:49:10" itemprop="dateCreated datePublished" datetime="2019-07-09T16:29:27+08:00">2019-07-09</time>
             </span>
           
 
@@ -474,7 +474,7 @@
 <p>“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着技术的发展，分布式web应用的普及，通过session管理用户登录状态成本越来越高，因此慢慢发展成为token的方式做登录身份校验，然后通过token去取redis中的缓存的用户信息，随着之后jwt的出现，校验方式更加简单便捷化，无需通过redis缓存，而是所有数据都保存在客户端，每次请求都发回服务器，随后服务器直接根据token取出保存的用户信息，以及对token可用性校验，单点登录更为简单。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>随着技术的发展，分布式web应用的普及，通过session管理用户登录状态成本越来越高，因此慢慢发展成为token的方式做登录身份校验，然后通过token去取redis中的缓存的用户信息，随着之后jwt的出现，校验方式更加简单便捷化，无需通过redis缓存，而是所有数据都保存在客户端，每次请求都发回服务器，随后服务器直接根据token取出保存的用户信息，以及对token可用性校验，单点登录更为简单。</p>
 <!--more-->
 
 <p>这篇文章中主要讲解了关于JSON Web Tokens（JWT）的基础概念，以及解释JWT为什么会被广泛应用。JWT是确保应用程序信任和安全的重要部分，它允许以诸如用户数据之类的安全的方式声明表示。</p>
@@ -745,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-创建头部（header）"><span class="nav-number">1.1.</span> <span class="nav-text">第一步 创建头部（header）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部-创建有效载荷（payload）"><span class="nav-number">1.2.</span> <span class="nav-text">第二部 创建有效载荷（payload）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步-创建签名（signature）"><span class="nav-number">1.3.</span> <span class="nav-text">第三步 创建签名（signature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步-生成JWT"><span class="nav-number">1.4.</span> <span class="nav-text">第四步 生成JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT是怎么保护数据的"><span class="nav-number">1.4.1.</span> <span class="nav-text">JWT是怎么保护数据的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步-验证JWT"><span class="nav-number">1.5.</span> <span class="nav-text">第五步 验证JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">1.6.</span> <span class="nav-text">结束语</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-创建头部（header）"><span class="nav-number">2.</span> <span class="nav-text">第一步 创建头部（header）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部-创建有效载荷（payload）"><span class="nav-number">3.</span> <span class="nav-text">第二部 创建有效载荷（payload）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步-创建签名（signature）"><span class="nav-number">4.</span> <span class="nav-text">第三步 创建签名（signature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步-生成JWT"><span class="nav-number">5.</span> <span class="nav-text">第四步 生成JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT是怎么保护数据的"><span class="nav-number">5.1.</span> <span class="nav-text">JWT是怎么保护数据的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步-验证JWT"><span class="nav-number">6.</span> <span class="nav-text">第五步 验证JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">7.</span> <span class="nav-text">结束语</span></a></li></ol></div>
             
 
           </div>
