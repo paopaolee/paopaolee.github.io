@@ -98,17 +98,17 @@
 <meta name="keywords" content="JavaScript,ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS进阶--Iterator and Generator">
-<meta property="og:url" content="http://yoursite.com/Web/LP20180917A/index.html">
+<meta property="og:url" content="https://paopaolee.github.io.com/Web/LP20180917A/index.html">
 <meta property="og:site_name" content="paopaolee">
 <meta property="og:description" content="“The best programmers are not marginally better than merely good ones.  They are an order-of-magnitude better, measured by whatever standard: conceptual creativity, speed, ingenuity of design, or pro">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://photo.weibo.com/5270133492/photos/detail/photo_id/4395455151734906">
-<meta property="og:image" content="http://photo.weibo.com/5270133492/photos/detail/photo_id/4395468451873189">
-<meta property="og:updated_time" content="2019-07-19T07:07:44.467Z">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5445v29amj30ii09wt9j.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g545ot8xz1j30l50flmya.jpg">
+<meta property="og:updated_time" content="2019-07-19T07:29:44.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS进阶--Iterator and Generator">
 <meta name="twitter:description" content="“The best programmers are not marginally better than merely good ones.  They are an order-of-magnitude better, measured by whatever standard: conceptual creativity, speed, ingenuity of design, or pro">
-<meta name="twitter:image" content="http://photo.weibo.com/5270133492/photos/detail/photo_id/4395455151734906">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5445v29amj30ii09wt9j.jpg">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/Web/LP20180917A/">
+  <link rel="canonical" href="https://paopaolee.github.io.com/Web/LP20180917A/">
 
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Web/LP20180917A/">
+    <link itemprop="mainEntityOfPage" href="https://paopaolee.github.io.com/Web/LP20180917A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="paopaolee">
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-19 15:07:44" itemprop="dateModified" datetime="2019-07-19T15:07:44+08:00">2019-07-19</time>
+                <time title="Modified: 2019-07-19 15:29:44" itemprop="dateModified" datetime="2019-07-19T15:29:44+08:00">2019-07-19</time>
               </span>
             
           
@@ -506,13 +506,13 @@
 
 </li>
 </ol>
-<p>下面这张图可以帮组我们建立可迭代性、迭代器、next之间的关系：<br><img src="http://photo.weibo.com/5270133492/photos/detail/photo_id/4395455151734906" alt="可迭代性、迭代器、next之间的关系"></p>
+<p>下面这张图可以帮组我们建立可迭代性、迭代器、next之间的关系：<br><img src="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5445v29amj30ii09wt9j.jpg" alt="可迭代性、迭代器、next之间的关系"></p>
 <h3 id="Generator（生成器）"><a href="#Generator（生成器）" class="headerlink" title="Generator（生成器）"></a>Generator（生成器）</h3><p>虽然自定义迭代器是一个十分有用的工具，但是从上面代码可以看出由于需要去显示维护其内部状态，所以创建迭代器需要谨慎的编程。生成器是一个强有力的替代工具，它使得我们可以更简单的创建迭代器对象。</p>
 <h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Generator_funcctions" target="_blank" rel="noopener">MDN定义</a>:</p>
 <blockquote>
 <p>生成器是一个返回迭代器的函数，它允许通过编写一个非连续执行的函数来定义迭代算法。它的的语法为“function* FuncName(){ }”。首次调用时，生成器函数不执行任何代码，而是返回一种称为Generator的迭代器。通过调用生成器的“next”方法消耗值时，Generator函数将执行，直到遇到yield关键字。</p>
 </blockquote>
-<p>简而言之，JavaScript中生成器是一个返回值为迭代器的函数，与普通函数不同的是，生成器函数在执行过程中可以中断并且能从中断的地方继续执行。下面的这张图对比了普通函数与生成器函数执行过程：<br><img src="http://photo.weibo.com/5270133492/photos/detail/photo_id/4395468451873189" alt="普通函数对比生成器函数的执行过程"></p>
+<p>简而言之，JavaScript中生成器是一个返回值为迭代器的函数，与普通函数不同的是，生成器函数在执行过程中可以中断并且能从中断的地方继续执行。下面的这张图对比了普通函数与生成器函数执行过程：<br><img src="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g545ot8xz1j30l50flmya.jpg" alt="普通函数对比生成器函数的执行过程"></p>
 <h4 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generatorFunction</span>(<span class="params"></span>)</span>&#123; <span class="comment">// line 1</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'This will be executed first.'</span>)</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'Hello,'</span>; <span class="comment">// line 2</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Iwill be printed after the pause.'</span>);</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'World!'</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> generatorObject = generatorFunction(); <span class="comment">// line 3</span></span><br><span class="line"><span class="built_in">console</span>.log(generatorObject.next().value); <span class="comment">// line 4</span></span><br><span class="line"><span class="comment">// This will be executed first.</span></span><br><span class="line"><span class="comment">// Hello, </span></span><br><span class="line"><span class="built_in">console</span>.log(generatorObject.next().value); <span class="comment">// line 5</span></span><br><span class="line"><span class="comment">// I will be printed after the pause</span></span><br><span class="line"><span class="comment">// World!</span></span><br><span class="line"><span class="built_in">console</span>.log(generatorObject.next().value); <span class="comment">// line 6</span></span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
 <p>上面代码中，我们使用了function* 的语法创建了一个生成器函数（line 1），在函数内部我们使用了另一个关键字yield（line 2），它只能在生成器中使用。生成器函数在执行过程中一旦运行到yield关键字时，会立即“返回”定义在它后面的值并中断函数的执行，注意此处的返回跟普通函数的return不同，在生成器上下文中，我们叫（yield）产出某值。</p>
