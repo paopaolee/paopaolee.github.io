@@ -102,13 +102,14 @@
 <meta property="og:site_name" content="paopaolee">
 <meta property="og:description" content="“The best programmers are not marginally better than merely good ones.  They are an order-of-magnitude better, measured by whatever standard: conceptual creativity, speed, ingenuity of design, or pro">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/005KEWt6ly1g56pf0mzyzj31920u04dw.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5445v29amj30ii09wt9j.jpg">
 <meta property="og:image" content="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g545ot8xz1j30l50flmya.jpg">
 <meta property="og:updated_time" content="2019-03-12T02:04:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS进阶--Iterator and Generator">
 <meta name="twitter:description" content="“The best programmers are not marginally better than merely good ones.  They are an order-of-magnitude better, measured by whatever standard: conceptual creativity, speed, ingenuity of design, or pro">
-<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5445v29amj30ii09wt9j.jpg">
+<meta name="twitter:image" content="http://wx2.sinaimg.cn/mw690/005KEWt6ly1g56pf0mzyzj31920u04dw.jpg">
 
 
 
@@ -437,7 +438,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
                 </span>
-                <span class="post-count">3.4k word</span>
+                <span class="post-count">3.5k word</span>
               </span>
           
 
@@ -447,7 +448,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-clock-o"></i>
                 </span>
-                <span class="post-count">13 mins</span>
+                <span class="post-count">14 mins</span>
               </span>
           
 
@@ -487,14 +488,15 @@
 <a id="more"></a>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>大多数编程语言已经从使用for循环（需要初始化变量以便跟踪数据在集合中的位置）转而使用以编程方式返回集合中下一项的迭代器对象来迭代数据。</p>
 <p>尽管迭代器使得处理数据集合更加容易,但是由于需要显式地维护其内部状态，因此它们的创建需要谨慎的编程。生成器函数提供了一个强大的选择：它们允许您通过编写一个执行不连续的函数来定义迭代算法。</p>
-<h3 id="循环问题"><a href="#循环问题" class="headerlink" title="循环问题"></a>循环问题</h3><p>如果你使用JavaScript(ES5)来编写过程序，那你很可能写类似一下子的代码：</p>
+<h3 id="循环的秘密"><a href="#循环的秘密" class="headerlink" title="循环的秘密"></a>循环的秘密</h3><p>如果你使用JavaScript(ES5)来编写过程序，那你很可能写类似一下子的代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; colors.length; i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(colord[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这种标准的for循环中，使用变量i来追踪colors数组的索引位置，变量i的值会随着每次迭代而递增直到它大于数组的长度值。<br>虽然上面的循环十分简单，但是当你嵌套循环并且需要跟踪多个变量时，循环会变得复杂。额外的复杂性可能导致错误，并且for循环的样板性质会导致更多错误，因为类似的代码写在多个地方。而迭代器旨在解决这些问题。</p>
-<h3 id="可迭代协议"><a href="#可迭代协议" class="headerlink" title="可迭代协议"></a>可迭代协议</h3><p>众所周知，在JavaScript中遍历数组中的每一个元素是一件很简单的事情，我们可以通过最原始的for、while循环，或ES6为我们提供的for-of之类的众多方法来实现。<br>但是在实际编程工作中，我们除了会使用数组这样的数据结构之外，还会大量使用自定义数据结构，那么我们如何去遍历或者说使这些自定义数据结构能够被循环迭代呢？<br>可迭代协议允许JavaScript对象定义或自定义其迭代行为，例如在for..of构造中循环的值；为了实现可迭代性，对象(或其原型上)必须实现<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator" target="_blank" rel="noopener">Symbol.iterator</a>方法，该方法返回一个叫做迭代器的对象。</p>
+<p>这种用最原始for循环来迭代数组(或类数组对象)是最简单也是最直观的，需要使用变量来追踪colors数组的索引位置，变量的值会随着每次迭代而递增直到它大于数组的长度值。<br>虽然上面的循环十分简单，但是当你嵌套循环并且需要跟踪多个变量时，循环会变得复杂。额外的复杂性可能导致错误，并且for循环的样板性质会导致更多错误，因为类似的代码写在多个地方。而迭代器旨在解决这些问题。</p>
+<h3 id="类数组对象的玄机"><a href="#类数组对象的玄机" class="headerlink" title="类数组对象的玄机"></a>类数组对象的玄机</h3><p>众所周知，在JavaScript中遍历数组中的每一个元素是一件很简单的事情，我们可以通过最原始的for、while循环，或ES6为我们提供的for-of之类的众多方法来实现；那么为什么这些方法就可以遍历数组或类数组对象（String、Map、Set、arguments）呢？而为什么这些方法不能遍历Object呢？<br>古人有云：要想战胜它，就先成为它；那么我们就先来来看看类数组对象究竟是什么货色。我分别打印了Array、Map、Set、还有String等类数组对象的信息，发现它们有一个共同的特征：其原型对象上都实现了[Symbol(Symbol.iterator)]方法。<br><img src="http://wx2.sinaimg.cn/mw690/005KEWt6ly1g56pf0mzyzj31920u04dw.jpg" alt="console info array"></p>
+<h3 id="可迭代协议"><a href="#可迭代协议" class="headerlink" title="可迭代协议"></a>可迭代协议</h3><p>在实际编程工作中，我们除了会使用数组这样的数据结构之外，还会大量使用自定义数据结构，那么我们如何去遍历或者说使这些自定义数据结构能够被循环迭代呢？上一节的[Symbol(Symbol.iterator)]方法会不会对此有用呢？<br>可迭代协议允许JavaScript对象定义或自定义其迭代行为，例如在for..of构造中循环的值；为了实现可迭代性，对象(或其原型上)必须实现<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator" target="_blank" rel="noopener">Symbol.iterator</a>方法，该方法返回一个叫做迭代器的对象。</p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iterable = &#123;</span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator]()&#123;</span><br><span class="line">        <span class="keyword">let</span> step = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">const</span> iterator = &#123;</span><br><span class="line">            next()&#123;</span><br><span class="line">                <span class="keyword">if</span>(step &lt; <span class="number">3</span>)&#123;</span><br><span class="line">                    step++;</span><br><span class="line">                    <span class="keyword">return</span> (&#123;</span><br><span class="line">                        value: step,</span><br><span class="line">                        done: <span class="literal">false</span>,</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    value: step,</span><br><span class="line">                    done: <span class="literal">true</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> iterator;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> iterator = iterable[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line"></span><br><span class="line">iterator.next() <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line">iterator.next() <span class="comment">// &#123;value: 2, done: false&#125;</span></span><br><span class="line">iterator.next() <span class="comment">// &#123;value: 3, done: false&#125;</span></span><br><span class="line">iterator.next() <span class="comment">// &#123;value: 3, done: true&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>JavaScript中一些内置数据类型是具有默认迭代行为的内置可迭代类型，例如String、Array、Mapy及Set，因为它们的原型上实现了[Symbol.iterator]方法。<br>当然还有很多地方使用了可迭代性，有的可能不太明显，比如：</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>JavaScript中一些内置数据类型是具有默认迭代行为的内置可迭代类型，例如String、Array、Mapy及Set，因为它们的原型上实现了[Symbol.iterator]方法，其实就是实现了可迭代协议。<br>当然还有很多地方使用了可迭代性，有的可能不太明显，比如：</p>
 <ol>
 <li>for-of循环</li>
 <li>数组结构</li>
@@ -623,8 +625,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/web/LP20190705A/" rel="prev" title="JS进阶--bind函数">
-                JS进阶--bind函数 <i class="fa fa-chevron-right"></i>
+              <a href="/web/LP20190705A/" rel="prev" title="JS进阶--bind原理及实现">
+                JS进阶--bind原理及实现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -696,7 +698,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -712,6 +714,8 @@
                     
                   
                     
+                    
+                      
                     
                       
                     
@@ -758,7 +762,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -796,7 +808,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环问题"><span class="nav-number">2.</span> <span class="nav-text">循环问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可迭代协议"><span class="nav-number">3.</span> <span class="nav-text">可迭代协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">3.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator（迭代器）"><span class="nav-number">4.</span> <span class="nav-text">Iterator（迭代器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例"><span class="nav-number">4.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator（生成器）"><span class="nav-number">5.</span> <span class="nav-text">Generator（生成器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-1"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举例说明"><span class="nav-number">5.2.</span> <span class="nav-text">举例说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">5.3.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级迭代器功能"><span class="nav-number">6.</span> <span class="nav-text">高级迭代器功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传递参数到迭代器"><span class="nav-number">6.1.</span> <span class="nav-text">传递参数到迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在生成器中抛出和捕获错误"><span class="nav-number">6.2.</span> <span class="nav-text">在生成器中抛出和捕获错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在生成器函数中使用return语句"><span class="nav-number">6.3.</span> <span class="nav-text">在生成器函数中使用return语句</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环的秘密"><span class="nav-number">2.</span> <span class="nav-text">循环的秘密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数组对象的玄机"><span class="nav-number">3.</span> <span class="nav-text">类数组对象的玄机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可迭代协议"><span class="nav-number">4.</span> <span class="nav-text">可迭代协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">4.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-number">4.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator（迭代器）"><span class="nav-number">5.</span> <span class="nav-text">Iterator（迭代器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例"><span class="nav-number">5.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator（生成器）"><span class="nav-number">6.</span> <span class="nav-text">Generator（生成器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-1"><span class="nav-number">6.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举例说明"><span class="nav-number">6.2.</span> <span class="nav-text">举例说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">6.3.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级迭代器功能"><span class="nav-number">7.</span> <span class="nav-text">高级迭代器功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传递参数到迭代器"><span class="nav-number">7.1.</span> <span class="nav-text">传递参数到迭代器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在生成器中抛出和捕获错误"><span class="nav-number">7.2.</span> <span class="nav-text">在生成器中抛出和捕获错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在生成器函数中使用return语句"><span class="nav-number">7.3.</span> <span class="nav-text">在生成器函数中使用return语句</span></a></li></ol></li></ol></div>
             
 
           </div>

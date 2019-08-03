@@ -94,20 +94,21 @@
 
 
 
-  <meta name="description" content="“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski">
-<meta name="keywords" content="JWT,HTTPS">
+  <meta name="description" content="“There is no silver bullet”          —Fred Brooks">
+<meta name="keywords" content="JavaScript,Browser">
 <meta property="og:type" content="article">
-<meta property="og:title" content="漫谈Web--JWT">
-<meta property="og:url" content="https://paopaolee.github.io.com/web/LP20190709A/index.html">
+<meta property="og:title" content="漫谈Web--H5唤醒">
+<meta property="og:url" content="https://paopaolee.github.io.com/web/LP20190802A/index.html">
 <meta property="og:site_name" content="paopaolee">
-<meta property="og:description" content="“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski">
+<meta property="og:description" content="“There is no silver bullet”          —Fred Brooks">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g4tpdqiqwvj317n0u0djs.jpg">
-<meta property="og:updated_time" content="2019-07-09T09:49:00.000Z">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g5mnll32c0j30ow0niwg3.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g5mnm5ifapj30ru0se773.jpg">
+<meta property="og:updated_time" content="2019-08-03T11:27:04.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="漫谈Web--JWT">
-<meta name="twitter:description" content="“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski">
-<meta name="twitter:image" content="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g4tpdqiqwvj317n0u0djs.jpg">
+<meta name="twitter:title" content="漫谈Web--H5唤醒">
+<meta name="twitter:description" content="“There is no silver bullet”          —Fred Brooks">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g5mnll32c0j30ow0niwg3.jpg">
 
 
 
@@ -115,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="https://paopaolee.github.io.com/web/LP20190709A/">
+  <link rel="canonical" href="https://paopaolee.github.io.com/web/LP20190802A/">
 
 
 
@@ -125,7 +126,7 @@
   };
 </script>
 
-  <title>漫谈Web--JWT | paopaolee</title>
+  <title>漫谈Web--H5唤醒 | paopaolee</title>
   
 
 
@@ -351,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://paopaolee.github.io.com/web/LP20190709A/">
+    <link itemprop="mainEntityOfPage" href="https://paopaolee.github.io.com/web/LP20190802A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="paopaolee">
@@ -368,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">漫谈Web--JWT
+          <h1 class="post-title" itemprop="name headline">漫谈Web--H5唤醒
 
               
             
@@ -394,13 +395,23 @@
                 
               
 
-              <time title="Created: 2019-07-09 16:29:27 / Modified: 17:49:00" itemprop="dateCreated datePublished" datetime="2019-07-09T16:29:27+08:00">2019-07-09</time>
+              <time title="Created: 2019-08-02 17:16:58" itemprop="dateCreated datePublished" datetime="2019-08-02T17:16:58+08:00">2019-08-02</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-03 19:27:04" itemprop="dateModified" datetime="2019-08-03T19:27:04+08:00">2019-08-03</time>
+              </span>
             
           
 
@@ -426,7 +437,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
                 </span>
-                <span class="post-count">1.9k word</span>
+                <span class="post-count">2.7k word</span>
               </span>
           
 
@@ -436,7 +447,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-clock-o"></i>
                 </span>
-                <span class="post-count">6 mins</span>
+                <span class="post-count">10 mins</span>
               </span>
           
 
@@ -471,80 +482,80 @@
 
       
         <blockquote>
-<p>“The most amazing achievement of the computer software industry is its continuing cancellation of the steady and staggering gains made by the computer hardware industry.”          —Henry Petroski</p>
+<p>“There is no silver bullet”          —Fred Brooks</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>随着技术的发展，分布式web应用的普及，通过session管理用户登录状态成本越来越高，因此慢慢发展成为token的方式做登录身份校验，然后通过token去取redis中的缓存的用户信息，随着之后jwt的出现，校验方式更加简单便捷化，无需通过redis缓存，而是所有数据都保存在客户端，每次请求都发回服务器，随后服务器直接根据token取出保存的用户信息，以及对token可用性校验，单点登录更为简单。</p>
-<!--more-->
-
-<p>这篇文章中主要讲解了关于JSON Web Tokens（JWT）的基础概念，以及解释JWT为什么会被广泛应用。JWT是确保应用程序信任和安全的重要部分，它允许以诸如用户数据之类的安全的方式声明表示。</p>
-<p>为了JWT的工作原理，我们先来看一看关于它的抽象定义：</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在信息爆炸的时代，让客户主动去搜索发现，已经越来越难了。如何让精准用户去主动发现，成为APP运营的核心，也是APP推广的重点，特别是在移动互联网的时代，社交成为营销的核心，APP引流是一大亮点，这里引流有两种形式，引导已下载用户打开APP，引导未下载用户下载APP。<br>从技术的层面来说，就需要一个合理可行的方案来解决如何从H5（网页）中唤醒APP，同时又能给予用户直观且优雅的体验。</p>
+<h3 id="浏览器与APP"><a href="#浏览器与APP" class="headerlink" title="浏览器与APP"></a>浏览器与APP</h3><p>其实二者彼此根本就是风马牛不相及，浏览器也可以看作是一个应用程序，只不过APP中可以通过WebView控件来获得展示web页面的功能。不管在iOS还是Android上，在浏览器中运行的的网页（脚本）都无法直接获取本机APP相关信息。</p>
+<p>一般来说，我们使用的智能设备上有许多我们的个人信息。比如：联系方式、银行卡/信用卡信息、支付宝/Paypal/各大商城的账户密码、照片甚至行程与位置信息等，如何让这些信息仅在设备所有者本人知情并允许的情况下被使用，是所有智能设备与操作系统所要在乎的核心安全问题。针对这个问题，iOS使用了沙盒机制目的就是让APP只能访问它声明可能访问的资源。</p>
+<h3 id="URL-Scheme"><a href="#URL-Scheme" class="headerlink" title="URL Scheme"></a>URL Scheme</h3><p><code>新技术的产生是为了解决问题，解决问题的同时可能也会产生新的问题，毕竟没有银弹。</code>在保障信息安全方面沙盒是个很好的解决办法，但也阻碍了应用间合理的信息共享。URL Schema 应运而生。</p>
+<h4 id="什么是URL-Scheme"><a href="#什么是URL-Scheme" class="headerlink" title="什么是URL Scheme"></a>什么是URL Scheme</h4><p>对比我们熟悉的网址URL，Schema其实就是一种特殊的URL。</p>
 <blockquote>
-<p>JSON Web Token（JWT）是一种JSON对象，在<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="noopener">RFC 7519</a>中定义为表示双方之间的一组信息的安全方式；它由头部、有效负载和签名三部分组成。</p>
+<p>[scheme://][host][path][?query][#fragment]<br><code>https://www.baidu.com/s?wd=paopaolee</code></p>
 </blockquote>
-<p>我们完全可以把JWT简单地看成仅仅是符合以下格式的字符串</p>
+<p>像定位一个网页一样，我们可以使用URL Scheme定位一个APP甚至APP里某个具体的功能。</p>
 <blockquote>
-<p>header.payload.signature</p>
+<p>scheme://[path][?query]</p>
 </blockquote>
-<p>Notes: 合法的JSON必须是使用双引号的字符串</p>
-<p>为了理解JWT是如何被使用的，我们将使用User（用户）、Application Server（应用服务器）、Authentication Server（授权服务器）3个简单的实体加以解释说明。其中Authentication Server将提供JWT给用户，用户拿到JWT后就可以和应用（app/website）安全地通信。</p>
-<p><img src="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g4tpdqiqwvj317n0u0djs.jpg" alt="How an application uses JWT to verify the authenticity of a user."></p>
-<p>上图中，User携带用户名/密码等可证明身份的内容去授权服务器获取JWT信息，每次服务都携带该Token内容与应用服务器进行交互，由应用服务器来验证Token是否是授权系统发放的有效Token，来验证当前业务是否请求是否合法。</p>
-<p>接下来我们深入理解JWT是如何构造以及如何验证的。</p>
-<h3 id="第一步-创建头部（header）"><a href="#第一步-创建头部（header）" class="headerlink" title="第一步 创建头部（header）"></a>第一步 创建头部（header）</h3><p>JWT的头部包含了JWT自身的签名算法信息，它是一个具有如下格式的JSON对象：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"typ"</span>: <span class="string">"JWT"</span>,</span><br><span class="line">    <span class="attr">"alg"</span>: <span class="string">"HS256"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个JSON中, typ属性表示令牌的类型，JWT令牌统一写为JWT。alg属性表示签名使用的算法，默认为HMAC SHA256（写为HS256）</p>
-<h3 id="第二部-创建有效载荷（payload）"><a href="#第二部-创建有效载荷（payload）" class="headerlink" title="第二部 创建有效载荷（payload）"></a>第二部 创建有效载荷（payload）</h3><p>JWT的有效载荷即是JWT的主体内容部分,包含了需要传递的数据（这些数据也被称为JWT的声明）。在我们的🌰中，JWT中存储了用户ID信息。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"userId"</span>: <span class="string">"b08f86af-35da-48f2-8fab-cef3904660bd"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的🌰中，我们的JWT仅仅存储了一个信息。然而JWT 规定了7个官方字段，供选用</p>
-<blockquote>
-<ul>
-<li>iss (issuer)：签发人</li>
-<li>exp (expiration time)：过期时间</li>
-<li>sub (subject)：主题</li>
-<li>aud (audience)：受众</li>
-<li>nbf (Not Before)：生效时间</li>
-<li>iat (Issued At)：签发时间</li>
-<li>jti (JWT ID)：编号</li>
+<p>其中Scheme对应APP标识， path对应APP的某个功能，query即为功能所需参数。<br><a href="https://cloud.tencent.com/developer/article/1397306" target="_blank" rel="noopener">这里列举出一些常用APP URL Scheme</a></p>
+<p>虽然URL Scheme类似于网页URL，但两者还是有很大区别的，其中：</p>
+<ol>
+<li><p>网页都有自己的网址，而APP不一定有自己的URL Scheme, 一个 App 是否支持 URL Schemes取决于App开作者是否添加了 URL Schemes相关的代码。</p>
+</li>
+<li><p>网页与网址是一一对应的关系，但是由于苹果没有对URL Schemes做唯一性硬性要求，故并非每个URL Schemes都只对应一款应用。(<a href="https://jbguide.me/2015/url-scheme-is-vulnerable" target="_blank" rel="noopener">这可能会导致严重的安全性问题</a>)</p>
+</li>
+</ol>
+<p>APP可以向宿主操作系统注册一个URL Scheme，该scheme用于从浏览器或其他应用中启动本应用，通过scheme协议来跳转到相应的APP界面，比如商品详情，活动详情，商家详情等等界面。也可以执行某些指定动作，如完成支付等。也可以在应用内部通过H5页面来直接跳转APP某个界面。</p>
+<h4 id="URL-Scheme应用场景"><a href="#URL-Scheme应用场景" class="headerlink" title="URL Scheme应用场景"></a>URL Scheme应用场景</h4><ul>
+<li>APP根据服务器下发URL Scheme跳转相应的页面</li>
+<li>网页或H5页面通过URL Scheme启动相应APP并且可以跳转具体页面</li>
+<li>APP通过URL Scheme跳转到另外一个APP指定页面<h4 id="URL-Scheme的不足之处"><a href="#URL-Scheme的不足之处" class="headerlink" title="URL Scheme的不足之处"></a>URL Scheme的不足之处</h4></li>
 </ul>
+<ol>
+<li>现如今诸如微信、微博等主流的APP，已经屏蔽掉了URL Scheme</li>
+<li>iOS中使用URL Scheme唤醒APP时，会出现弹窗提示，并且失败也会出现提示窗，用户体验不太友好。</li>
+<li>使用URL Scheme唤醒APP时，无法得知是否唤醒成功。<h3 id="Android-Intent"><a href="#Android-Intent" class="headerlink" title="Android Intent"></a>Android Intent</h3>URL Scheme在Android的Chrome浏览器中存在很大差异，在18及之前的版本中的，URL Scheme能够正常工作，但是从版本25以后，通过URL Scheme已经无法启动一个android app了。取而代之是android 提供了Intent方案。<h4 id="什么是Intent"><a href="#什么是Intent" class="headerlink" title="什么是Intent"></a>什么是Intent</h4>Android中提供了Intent机制来协助APP间的交互与通讯。当然，它不仅可用于应用程序之间，也可用于应用程序内部的 Activity / Service之间的交互。它可以更灵活地控制应用程序的启动方式，并且可以通过Intent Extras将额外信息传递到APP。<a href="https://developer.chrome.com/multidevice/android/intents" target="_blank" rel="noopener">进一步了解Intent</a><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4>基于Intent的URI基本格式如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">intent:</span><br><span class="line">   HOST/URI-path // Optional host </span><br><span class="line">   #Intent; </span><br><span class="line">      package=[string]; </span><br><span class="line">      action=[string]; </span><br><span class="line">      category=[string]; </span><br><span class="line">      component=[string]; </span><br><span class="line">      scheme=[string]; </span><br><span class="line">   end;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>当无法解析Intent或无法启动外部APP时，默认会跳转到系统默认的应用程序商店，当然你也可以通过下方的代码选择给Intent定义一个回调URL，这样失败时会将用户重定向到定义的回调URL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S.browser_fallback_url=[encoded_full_url]</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>为了启动Zxing二维码扫描APP，可以通过如下的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end&quot;&gt; Take a QR code &lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>对应的Intent如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">intent:</span><br><span class="line">   //scan/</span><br><span class="line">   #Intent; </span><br><span class="line">      package=com.google.zxing.client.android; </span><br><span class="line">      scheme=zxing; </span><br><span class="line">   end;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>//scan/</code>对应HOST/URL-path, <code>com.google.zxing.client.android;</code>对应package, <code>zxing</code>对应scheme，这些参数都是在APP开发配置在Manifest中的。</p>
+<h3 id="Universal-Link"><a href="#Universal-Link" class="headerlink" title="Universal Link"></a>Universal Link</h3><p>在iOS9之前，对于从各种从浏览器、Safari中唤醒APP的需求，我们通常只能使用URL Scheme。但是正如我们上面所说，URL Scheme有它自身的不足。其中最主要的是它并没有强制唯一，这可能会带来安全问题。</p>
+<h4 id="什是Universal-Link"><a href="#什是Universal-Link" class="headerlink" title="什是Universal Link"></a>什是Universal Link</h4><p>Universal Link是iOS9推出的一项功能，使你可以通过传统的HTTP链接来启动APP(如果iOS设备上已经安装了你的app，不管在微信里还是在哪里)， 或者打开网页(iOS设备上没有安装你的app)。该方案较url scheme有明显的改善。URL Scheme很难做到唯一，而universal link却是你自己控制的，而且Universal Link实现了web-app无缝衔接，没有弹窗提示，用户体验明显好于URL Scheme。<br><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html" target="_blank" rel="noopener">进一步了解Universal Link</a><br>默认地，Universal Link能直接打开已安装的APP，无需通过Safari。如果用户没有安装对应的APP时，不同于Schema，Universal Link也是一个合法的URL地址，可以在Safari中打开。</p>
+<h4 id="Universal-Link-的特点"><a href="#Universal-Link-的特点" class="headerlink" title="Universal Link 的特点"></a>Universal Link 的特点</h4><ol>
+<li>唯一性: 不像自定义的URL Scheme，Universal 不能够被其它APP声明，因为它是使用标准的HTPPS或HTTP协议来链接到你的网站</li>
+<li>安全性: 当用户安装您的APP时，iOS会检查您上传到您的web服务器的文件，以确保您的网站允许您的APP在其上打开网址。并且只有您可以创建并上传此文件，因此您的网站与APP的关联是安全的</li>
+<li>灵活性: 即使你没有安装对应的APP，Universal Link也能在Safari中打开内容。</li>
+<li>简单行: 一个URL就能使用户在网站和APP间切换。</li>
+<li>私密性: 其它APP无需知晓你的APP是否已经安装也能通信<blockquote>
+<p>⚠️： 当用户在Safari中浏览您的网站并点击了与当前网页同域的Universal Link时，iOS会直接在Safari中打开该链接。如果是不同域的Universal Link，iOS才会尝试在您的APP中打开。</p>
 </blockquote>
-<p>当然除了官方字段，你还可以在这个部分定义私有字段，诸如：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"sub"</span>: <span class="string">"1234567890"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"John Doe"</span>,</span><br><span class="line">    <span class="attr">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="从加载过程分析Universal-Link的不足"><a href="#从加载过程分析Universal-Link的不足" class="headerlink" title="从加载过程分析Universal Link的不足"></a>从加载过程分析Universal Link的不足</h4>一个硬性的不足在于，Universal Link只在iOS9才开始支持，除此之外我们说Universal 就是标准的HTTPS或HTTP链接，那么我们先来看一下一般的URL在WebView中的加载过程，如图所示从解析URL到页面加载完成的过程：<br><img src="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g5mnll32c0j30ow0niwg3.jpg" alt="普通URL在WebView中加载过程"><br>那么Universal Link 加载过程又是如何的呢？<br><img src="http://wx3.sinaimg.cn/mw690/005KEWt6ly1g5mnm5ifapj30ru0se773.jpg" alt="Universal Link在WebView中加载过程"><br>相信大家可以看到，Universal Link功能是很容易被封锁掉的，只需要在APP中判断你的域名是否在其允许的。现如今很多主流的APP，它们各自维护着一份白名单，除非你在它的白名单内，否则都会屏蔽掉唤醒操作。尤其是微信，除非腾讯系的APP，其它APP都无法从微信内容中被唤醒，所以淘宝推出了我们熟悉的<code>淘口令</code>。<h3 id="应用宝APP-Link"><a href="#应用宝APP-Link" class="headerlink" title="应用宝APP Link"></a>应用宝APP Link</h3>腾讯应用宝对外开放了一个叫做APP Link 的申请，只要你申请了APP Link，就可以通过在打开应用宝的时候在应用宝地址后面添加上 &amp;android_schema={your_scheme} ，来打开指定的页面了。<a href="https://wiki.open.qq.com/index.php?title=AppLink%E6%8E%A5%E5%85%A5" target="_blank" rel="noopener">进一步了解应用宝APP Link</a><h3 id="唤醒APP的具体实现"><a href="#唤醒APP的具体实现" class="headerlink" title="唤醒APP的具体实现"></a>唤醒APP的具体实现</h3>上面我们介绍了几种启动APP的解决方案，无论是 URL Scheme 还是 Intent 或者 Universal Link、APP Link，他们都算是URL ，只是URL Scheme 和 Intent 算是特殊的 URL。所以我们可以如同使用URL的方法来使用它们。</li>
+</ol>
+<h4 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h4><p>iframe方案的唤醒原理是: 程序切换到后台时，计时器会被推迟(计时器不准的又一种情况)。如果app被唤醒那么网页必然就进入了后台，如果用户从app切回来，那么时间一般会超过2s;若app没有被唤起，那么网页不会进入后台，setTimeout基本准时触发，那么时间不会超过2s</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> last = <span class="built_in">Date</span>.now(),</span><br><span class="line">	doc = <span class="built_in">window</span>.document,</span><br><span class="line">	ifr = doc.createElement(<span class="string">'iframe'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个隐藏的iframe</span></span><br><span class="line">ifr.src = nativeUrl;</span><br><span class="line">ifr.style.cssText = <span class="string">'display:none;border:0;width:0;height:0;'</span>;</span><br><span class="line">doc.body.appendChild(ifr);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	doc.body.removeChild(ifr);</span><br><span class="line">	<span class="comment">//setTimeout回小于2000一般为唤起失败 </span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">Date</span>.now() - last &lt; <span class="number">2000</span>) &#123;</span><br><span class="line">    	<span class="keyword">if</span> (<span class="keyword">typeof</span> onFail == <span class="string">'function'</span>) &#123;</span><br><span class="line">        	onFail();</span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        	<span class="comment">//弹窗提示或下载处理等</span></span><br><span class="line">    	&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="keyword">if</span> (<span class="keyword">typeof</span> onSuccess == <span class="string">'function'</span>) &#123;</span><br><span class="line">        	onSuccess();</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 
-<p>值得注意的是有效载荷的存储数据的大小会影响整个JWT的大小，一般来说对JWT的大小没有限制但是过大的JWT可能会影响性能或造成潜在的问题。</p>
-<h3 id="第三步-创建签名（signature）"><a href="#第三步-创建签名（signature）" class="headerlink" title="第三步 创建签名（signature）"></a>第三步 创建签名（signature）</h3><p>签名是为了防止数据被篡改。</p>
-<p>JWT的签名使用以下伪代码实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// signature algorithm</span></span><br><span class="line">data = base64urlEncode( header ) + “.” + base64urlEncode( payload )</span><br><span class="line">hashedData = hash( data, secret )</span><br><span class="line">signature = base64urlEncode( hashedData )</span><br></pre></td></tr></table></figure>
+<p>在只有 URL Scheme 的日子里，iframe 是使用最多的了。因为在未安装 app 的情况下，不会去跳转错误页面。但是iframe 在各个系统以及各个应用中的兼容问题还是挺多的，不能全部使用 URL Scheme。</p>
+<h4 id="a标签"><a href="#a标签" class="headerlink" title="a标签"></a>a标签</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end"</span>"&gt;</span>扫一扫<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>该算法所做的使用base64urlEncode对在第一步创建的头部和第二部中的有效负载分别进行编码并用”.”号拼接成字符串。随后使用JWT头中指定的散列算法对字符串使用密钥进行散列。最后再使用base64urlEncode对生成的散列数据进行编码以产生JWT签名。（密钥只有服务器才知道，不能泄露给用户）</p>
-<p>这篇文章中，使用base64urlEncode对header和payload进行编码后得到如下结果：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// header</span></span><br><span class="line">base64urlEncode(&#123;</span><br><span class="line">    <span class="string">"typ"</span>: <span class="string">"JWT"</span>,</span><br><span class="line">    <span class="string">"alg"</span>: <span class="string">"HS256"</span></span><br><span class="line">&#125;)</span><br><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span><br><span class="line"><span class="comment">// payload</span></span><br><span class="line"><span class="comment">// base64urlEncode(&#123;</span></span><br><span class="line">    <span class="string">"userId"</span>: <span class="string">"b08f86af-35da-48f2-8fab-cef3904660bd"</span></span><br><span class="line">&#125;)</span><br><span class="line">eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ</span><br></pre></td></tr></table></figure>
+<h4 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location.href = <span class="string">'sinaweibo://qrcode'</span>;</span><br></pre></td></tr></table></figure>
 
-<p>然后将结果代入上面的伪代码会得到如下签名：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// signature</span></span><br><span class="line">-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM</span><br></pre></td></tr></table></figure>
-
-<h3 id="第四步-生成JWT"><a href="#第四步-生成JWT" class="headerlink" title="第四步 生成JWT"></a>第四步 生成JWT</h3><p>现在我们已经创建完成了JWT的header、payload、signature3个部分，那么再按照</p>
 <blockquote>
-<p>header.payload.signature</p>
+<p>⚠️： URL Scheme在ios 9+上诸如 safari、UC、QQ浏览器中， iframe 均无法成功唤起APP，只能通过 <code>window.location</code>才能成功唤端。当然，如果APP支持Universal Link，ios 9+就用不到URL Scheme了。而 Universal Link 在使用过程中，我发现在 qq 中，无论是 iframe 导航 还是 a 标签打开又或者 <code>window.location</code>都无法成功唤端，一开始我以为是 qq 和微信一样禁止了 Universal Link 唤端的功能，其实不然，百般试验下，通过<code>top.location</code>唤端成功了。</p>
 </blockquote>
-<p>的格式将3个部分组合起来就是所谓的JWT了。如下就是我们🌰中的JWT</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JWT</span></span><br><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NjYwYmQifQ.-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM</span><br></pre></td></tr></table></figure>
-
-<p>在<a href="https://jwt.io/" target="_blank" rel="noopener">JWT官方网站</a>，你可以尝试创建自己的JWT。</p>
-<hr>
-<p>回到我们的案例，这个Authentication Server 已经创建了一个JWT，并且发给了用户。</p>
-<h4 id="JWT是怎么保护数据的"><a href="#JWT是怎么保护数据的" class="headerlink" title="JWT是怎么保护数据的"></a>JWT是怎么保护数据的</h4><p>注意，这里经常会有一个误区，JWT本身和安全没关系，它就仅仅只是一个字符串，使用它来做安全远不如类似于RSA2这样的非对称加密的形式来的实在，由于客户端的程序对用户几乎完全透明，验签的过程对于他们来讲也是透明的，所以安全性肯定不会靠这个来实现，如果实在怕JWT的被盗取，可以考虑在Payload部分加入一些客户端独有的非敏感信息，用于在服务端来进行核验，比如使用MAC-Message Authentication Code、或者公钥之类的等等; 或者干脆就把生效时间设置的短一些，也可以减少暴露的风险。</p>
-<p>JWT的数据被编码和被签名，但是没有被加密。编码的目的是转化数据结构，签名是为了数据的接收者验证数据的权威性。所以编码和签名并不会保护数据的安全性。而加密的主要目的才是为了保护数据安全防止未授权访问。对于详细描述编码与加密的区别，可以参考<a href="https://danielmiessler.com/study/encoding-encryption-hashing-obfuscation/#encoding" target="_blank" rel="noopener">这篇文章</a>。</p>
-<blockquote>
-<p>Since JWT are signed and encoded only, and since JWT are not encrypted, JWT do not guarantee any security for sensitive data.</p>
-<p>由于JWT仅仅被编码和签名而没有被加密过的，所以它无法保证任何敏感信息的安全性。</p>
-</blockquote>
-<h3 id="第五步-验证JWT"><a href="#第五步-验证JWT" class="headerlink" title="第五步 验证JWT"></a>第五步 验证JWT</h3><p>第四步中我们已经知道JWT的签名生成需要用密钥（secret），这个密钥只有授权服务器知道。应与服务器开启认证处理时，需要从授权服务器获取此密钥。此后当用户携带JWT访问应用服务器时，应用服务器拿到JWT后可以<br>通过类似第三步的方法生成一个签名，然后与用户携带的JWT的签名进行对比从而验证用户JWT是否有效。</p>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>本文中描述的JWT认证设置使用对称密钥算法（HS256）。您也可以使用非对称算法（例如RS256），即授权服务器具有密钥，并且应用程序服务器具有公钥。<a href="https://stackoverflow.com/questions/39239051/rs256-vs-hs256-whats-the-difference" target="_blank" rel="noopener">了解使用对称和非对称算法之间差异的详细分类。</a></p>
-<p>还应该注意，JWT应该通过HTTPS连接（而不是HTTP）发送。HTTPS有助于防止未经授权的用户窃取所发送的JWT，从而无法拦截服务器和用户之间的通信。</p>
-<p>同时，JWT应该设置有效期，并且有效期不要太长。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在唤醒功能的实现上没有完美通用的解决方案，我们只能根据特定的业务，在代码层上确保能够覆盖最常用的场景。<br>这里推荐你两个较为通用的解决方案<a href="https://github.com/suanmei/callapp-lib" target="_blank" rel="noopener">call-lib</a>和<a href="https://github.com/jawidx/web-launch-app" target="_blank" rel="noopener">web-launch-app</a>。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="https://suanmei.github.io/2018/08/23/h5_call_app/" target="_blank" rel="noopener">H5唤起APP指南</a></li>
+<li><a href="http://echozq.github.io/echo-blog/2015/11/13/callapp.html" target="_blank" rel="noopener">H5唤起APP</a></li>
+</ul>
 
       
     </div>
@@ -571,9 +582,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/JWT/" rel="tag"># JWT</a>
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            <a href="/tags/HTTPS/" rel="tag"># HTTPS</a>
+            <a href="/tags/Browser/" rel="tag"># Browser</a>
           
         </div>
       
@@ -586,8 +597,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/web/LP20190705A/" rel="next" title="JS进阶--bind原理及实现">
-                <i class="fa fa-chevron-left"></i> JS进阶--bind原理及实现
+              <a href="/web/LP20190710A/" rel="next" title="Set、Map、WeakSet、WeakMap的区别">
+                <i class="fa fa-chevron-left"></i> Set、Map、WeakSet、WeakMap的区别
               </a>
             
           </div>
@@ -595,10 +606,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/web/LP20190710A/" rel="prev" title="Set、Map、WeakSet、WeakMap的区别">
-                Set、Map、WeakSet、WeakMap的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -779,7 +786,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-创建头部（header）"><span class="nav-number">2.</span> <span class="nav-text">第一步 创建头部（header）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部-创建有效载荷（payload）"><span class="nav-number">3.</span> <span class="nav-text">第二部 创建有效载荷（payload）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步-创建签名（signature）"><span class="nav-number">4.</span> <span class="nav-text">第三步 创建签名（signature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步-生成JWT"><span class="nav-number">5.</span> <span class="nav-text">第四步 生成JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT是怎么保护数据的"><span class="nav-number">5.1.</span> <span class="nav-text">JWT是怎么保护数据的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步-验证JWT"><span class="nav-number">6.</span> <span class="nav-text">第五步 验证JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">7.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器与APP"><span class="nav-number">2.</span> <span class="nav-text">浏览器与APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-Scheme"><span class="nav-number">3.</span> <span class="nav-text">URL Scheme</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是URL-Scheme"><span class="nav-number">3.1.</span> <span class="nav-text">什么是URL Scheme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL-Scheme应用场景"><span class="nav-number">3.2.</span> <span class="nav-text">URL Scheme应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL-Scheme的不足之处"><span class="nav-number">3.3.</span> <span class="nav-text">URL Scheme的不足之处</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Intent"><span class="nav-number">4.</span> <span class="nav-text">Android Intent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Intent"><span class="nav-number">4.1.</span> <span class="nav-text">什么是Intent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本语法"><span class="nav-number">4.2.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">4.3.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Universal-Link"><span class="nav-number">5.</span> <span class="nav-text">Universal Link</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什是Universal-Link"><span class="nav-number">5.1.</span> <span class="nav-text">什是Universal Link</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Universal-Link-的特点"><span class="nav-number">5.2.</span> <span class="nav-text">Universal Link 的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从加载过程分析Universal-Link的不足"><span class="nav-number">5.3.</span> <span class="nav-text">从加载过程分析Universal Link的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用宝APP-Link"><span class="nav-number">6.</span> <span class="nav-text">应用宝APP Link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唤醒APP的具体实现"><span class="nav-number">7.</span> <span class="nav-text">唤醒APP的具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#iframe"><span class="nav-number">7.1.</span> <span class="nav-text">iframe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a标签"><span class="nav-number">7.2.</span> <span class="nav-text">a标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#window-location"><span class="nav-number">7.3.</span> <span class="nav-text">window.location</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">9.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
 
           </div>
