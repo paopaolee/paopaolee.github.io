@@ -94,21 +94,21 @@
 
 
 
-  <meta name="description" content="原文: How video streaming works on the web: An introduction 渴求原生视频API从2000年代早期到晚期，网络上的视频播放主要依赖于Flash插件。这是因为在那个时候，浏览器中没有实现其他的视频流播放方案。用户如果想要在网页中播放视频，只能通过安装第三方插件，比如flash或者silverlight，来播放视频，否则根本无法观看视频。 为了填写">
+  <meta name="description" content="原文: How video streaming works on the web: An introduction">
 <meta name="keywords" content="播放器,译文， HTML5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[译]Web视频流原理：简介篇">
+<meta property="og:title" content="[译]Web视频播放原理：介绍">
 <meta property="og:url" content="https://paopaolee.github.io.com/web/LP20190706A/index.html">
 <meta property="og:site_name" content="paopaolee">
-<meta property="og:description" content="原文: How video streaming works on the web: An introduction 渴求原生视频API从2000年代早期到晚期，网络上的视频播放主要依赖于Flash插件。这是因为在那个时候，浏览器中没有实现其他的视频流播放方案。用户如果想要在网页中播放视频，只能通过安装第三方插件，比如flash或者silverlight，来播放视频，否则根本无法观看视频。 为了填写">
+<meta property="og:description" content="原文: How video streaming works on the web: An introduction">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5qzzp0tp2j30r308kdgi.jpg">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g5r4l6jl0oj30wk0c3dp1.jpg">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw690/005KEWt6ly1g5r8x0y252j30sh0fbq4p.jpg">
-<meta property="og:updated_time" content="2019-08-07T10:14:57.349Z">
+<meta property="og:updated_time" content="2019-08-07T10:27:55.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[译]Web视频流原理：简介篇">
-<meta name="twitter:description" content="原文: How video streaming works on the web: An introduction 渴求原生视频API从2000年代早期到晚期，网络上的视频播放主要依赖于Flash插件。这是因为在那个时候，浏览器中没有实现其他的视频流播放方案。用户如果想要在网页中播放视频，只能通过安装第三方插件，比如flash或者silverlight，来播放视频，否则根本无法观看视频。 为了填写">
+<meta name="twitter:title" content="[译]Web视频播放原理：介绍">
+<meta name="twitter:description" content="原文: How video streaming works on the web: An introduction">
 <meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5qzzp0tp2j30r308kdgi.jpg">
 
 
@@ -127,7 +127,7 @@
   };
 </script>
 
-  <title>[译]Web视频流原理：简介篇 | paopaolee</title>
+  <title>[译]Web视频播放原理：介绍 | paopaolee</title>
   
 
 
@@ -370,7 +370,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[译]Web视频流原理：简介篇
+          <h1 class="post-title" itemprop="name headline">[译]Web视频播放原理：介绍
 
               
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-07 18:14:57" itemprop="dateModified" datetime="2019-08-07T18:14:57+08:00">2019-08-07</time>
+                <time title="Modified: 2019-08-07 18:27:55" itemprop="dateModified" datetime="2019-08-07T18:27:55+08:00">2019-08-07</time>
               </span>
             
           
@@ -483,6 +483,8 @@
 
       
         <p>原文: <a href="https://medium.com/canal-tech/how-video-streaming-works-on-the-web-an-introduction-7919739f7e1" target="_blank" rel="noopener">How video streaming works on the web: An introduction</a></p>
+<a id="more"></a>
+
 <h3 id="渴求原生视频API"><a href="#渴求原生视频API" class="headerlink" title="渴求原生视频API"></a>渴求原生视频API</h3><p>从2000年代早期到晚期，网络上的视频播放主要依赖于Flash插件。这是因为在那个时候，浏览器中没有实现其他的视频流播放方案。用户如果想要在网页中播放视频，只能通过安装第三方插件，比如flash或者silverlight，来播放视频，否则根本无法观看视频。</p>
 <p>为了填写这一空白，网页超文本应用技术工作小组（WHATWG）开始着手制订新版本的HTML标准，其中就包括原生视频和音频（无需插件）播放。这个新版本的HTML标准就是大家熟知的HTML5.</p>
 <p>于是HTML5给web开发带来<code>&lt;Video&gt;</code>标签，这个新标签允许开发者直接通过HTML加载视频资源，类似于通过<code>&lt;img&gt;</code>标签加载图片资源。这个一个很酷的事情，但是从媒体网站的角度看来，这种类似图片加载的方式似乎不足以取代flash，原因如下：</p>
@@ -664,8 +666,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/web/LP20190705A/" rel="next" title="JS进阶--bind原理及实现">
-                <i class="fa fa-chevron-left"></i> JS进阶--bind原理及实现
+              <a href="/web/LP20190802A/" rel="next" title="漫谈Web--H5唤醒">
+                <i class="fa fa-chevron-left"></i> 漫谈Web--H5唤醒
               </a>
             
           </div>
@@ -673,10 +675,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/web/LP20190709A/" rel="prev" title="漫谈Web--JWT">
-                漫谈Web--JWT <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
