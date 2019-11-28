@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5qzzp0tp2j30r308kdgi.jpg">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/005KEWt6ly1g5r4l6jl0oj30wk0c3dp1.jpg">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw690/005KEWt6ly1g5r8x0y252j30sh0fbq4p.jpg">
-<meta property="og:updated_time" content="2019-08-12T08:06:13.999Z">
+<meta property="og:updated_time" content="2019-11-28T10:37:29.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[译]Web视频播放原理：介绍">
 <meta name="twitter:description" content="原文: How video streaming works on the web: An introduction">
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-12 16:06:13" itemprop="dateModified" datetime="2019-08-12T16:06:13+08:00">2019-08-12</time>
+                <time title="Modified: 2019-11-28 18:37:29" itemprop="dateModified" datetime="2019-11-28T18:37:29+08:00">2019-11-28</time>
               </span>
             
           
@@ -513,11 +513,11 @@
 <ol>
 <li>audio</li>
 <li>video</li>
-<li>audio 和 video<blockquote>
-<p>注意： 实际上，内容的“类型”由其MIME类型定义，其还可以包括关于所使用的媒体编解码器的信息</p>
-</blockquote>
-</li>
+<li>audio 和 video</li>
 </ol>
+<blockquote>
+<p>⚠️： 实际上，内容的“类型”由其MIME类型定义，其还可以包括关于所使用的媒体编解码器的信息</p>
+</blockquote>
 <p>SourceBuffer都会链接到单个MediaSource，其中每个SourceBuffer都会被JavaScript用来将视频数据直接添加到HTML5视频标签。如下图所示：<br><img src="http://wx1.sinaimg.cn/mw690/005KEWt6ly1g5qzzp0tp2j30r308kdgi.jpg" alt="Relations between the video tag, the MediaSource, the SourceBuffers and the actual data"></p>
 <p>分离视频和音频还允许在服务器端单独管理它们。这样做会带来一些好处，我们稍后会看到。这是它的工作原理：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -- 创建MediaSource并关联到video  --</span></span><br><span class="line"><span class="keyword">const</span> videoTag = <span class="built_in">document</span>.getElementById(<span class="string">"my-video"</span>);</span><br><span class="line"><span class="keyword">const</span> myMediaSource = <span class="keyword">new</span> MediaSource();</span><br><span class="line"><span class="keyword">const</span> url = URL.createObjectURL(myMediaSource);</span><br><span class="line">videoTag.src = url;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 为MediaSource添加sourceBuffer</span></span><br><span class="line"><span class="keyword">const</span> audioSourceBuffer = myMediaSource</span><br><span class="line">  .addSourceBuffer(<span class="string">`audio/mp4; codecs="mp4a.40.2"`</span>);</span><br><span class="line"><span class="keyword">const</span> videoSourceBuffer = myMediaSource</span><br><span class="line">  .addSourceBuffer(<span class="string">`video/mp4; codecs="avc1.64001e"`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 下载并添加audio/video到SourceBuffers</span></span><br><span class="line"><span class="comment">// for the audio SourceBuffer</span></span><br><span class="line">fetch(<span class="string">"http://server.com/audio.mp4"</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The data has to be a JavaScript ArrayBuffer</span></span><br><span class="line">  <span class="keyword">return</span> response.arrayBuffer();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">audioData</span>) </span>&#123;</span><br><span class="line">  audioSourceBuffer.appendBuffer(audioData);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// the same for the video SourceBuffer</span></span><br><span class="line">fetch(<span class="string">"http://server.com/video.mp4"</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The data has to be a JavaScript ArrayBuffer</span></span><br><span class="line">  <span class="keyword">return</span> response.arrayBuffer();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">videoData</span>) </span>&#123;</span><br><span class="line">  videoSourceBuffer.appendBuffer(videoData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -612,7 +612,7 @@
 <li>Smooth Streaming<blockquote>
 <p>由微软开发，被多个微软产品和MyCanal使用。在Smooth Streaming的Manifest是基于xml的。</p>
 </blockquote>
-<h3 id="真实的网络世界"><a href="#真实的网络世界" class="headerlink" title="真实的网络世界"></a>真实的网络世界</h3>如您所见，web视频背后的核心概念在于用JavaScript动态推送的媒体片段。<br>这种行为很快变得相当复杂，因为视频播放器需要支持很多功能:</li>
+<h3 id="真实的网络世界"><a href="#真实的网络世界" class="headerlink" title="真实的网络世界"></a>真实的网络世界</h3>如您所见，web视频背后的核心概念在于用JavaScript动态推送的媒体片段。这种行为很快变得相当复杂，因为视频播放器需要支持很多功能:</li>
 <li>下载并解析某种Manifest文件</li>
 <li>监测当前的网络状况</li>
 <li>用户首选项(例如，首选语言)</li>
@@ -843,7 +843,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

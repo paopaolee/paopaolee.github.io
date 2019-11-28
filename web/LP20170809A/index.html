@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="paopaolee">
 <meta property="og:description" content="“Programming is like sex: one mistake and you’re providing support for a lifetime.”          —Michael Sinz">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-16T01:24:27.849Z">
+<meta property="og:updated_time" content="2019-11-28T10:46:52.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript的装箱拆箱机制?:自动类型转换">
 <meta name="twitter:description" content="“Programming is like sex: one mistake and you’re providing support for a lifetime.”          —Michael Sinz">
@@ -407,7 +407,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-16 09:24:27" itemprop="dateModified" datetime="2019-08-16T09:24:27+08:00">2019-08-16</time>
+                <time title="Modified: 2019-11-28 18:46:52" itemprop="dateModified" datetime="2019-11-28T18:46:52+08:00">2019-11-28</time>
               </span>
             
           
@@ -495,11 +495,12 @@
 <li>将原始值作为参数传递给一个期望接收该原始值对应包装类的对象的方法；</li>
 <li>将原始值赋值给一个类型为其对应的包装类对象的变量；<br>当然自动拆箱就是装箱的逆过程，主要发生在：</li>
 <li>将包装类对象作为参数传递给一个期望接收对应原始值的方法时；</li>
-<li>将包装类对象赋值给一个类型为其对应原始值的变量；<h3 id="JavaScript的自动拆装箱机制"><a href="#JavaScript的自动拆装箱机制" class="headerlink" title="JavaScript的自动拆装箱机制"></a>JavaScript的自动拆装箱机制</h3>其实JavaScript语言规范中，并没有提及自动拆装箱的概念，不过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply#Parameters" target="_blank" rel="noopener">MDN</a>中倒是有提到过类似概念：<blockquote>
+<li>将包装类对象赋值给一个类型为其对应原始值的变量；</li>
+</ul>
+<h3 id="JavaScript的自动拆装箱机制"><a href="#JavaScript的自动拆装箱机制" class="headerlink" title="JavaScript的自动拆装箱机制"></a>JavaScript的自动拆装箱机制</h3><p>其实JavaScript语言规范中，并没有提及自动拆装箱的概念，不过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply#Parameters" target="_blank" rel="noopener">MDN</a>中倒是有提到过类似概念：</p>
+<blockquote>
 <p>function.apply(thisArg, [argArry])<br><code>thisArg</code>: The value of this provided for the call to func. Note that this may not be the actual value seen by the method: if the method is a function in non-strict mode code, null and undefined will be replaced with the global object, and <code>primitive values will be boxed</code>. This argument is not optional</p>
 </blockquote>
-</li>
-</ul>
 <p>与Java这种完全面向对象的静态语言截然不同，JavaScript是一门动态的语言，它甚至都没有类概念（即使ES6带来<code>class</code>,但是它也只不过语法糖），这使得它具有很大的灵活性，当然也带来了很多让人很难理解掌握的特性，比如<code>==</code>和<code>===</code>；所以对于Java中的自动拆装箱机制，在JS中其实可以理解为大家熟知的类型转换中的一种特殊情况。</p>
 <h3 id="JavaScript中的类型转换"><a href="#JavaScript中的类型转换" class="headerlink" title="JavaScript中的类型转换"></a>JavaScript中的类型转换</h3><blockquote>
 <p>类型转换发生在静态类型语言的编译阶段，而强制类型转换则发生在动态类型语言的运行时(runtime)。然而在 JavaScript 中通常将它们统称为强制类型转换，我个人则倾向于用“隐式强制类型转换”(implicit coercion)和“显式强制类型转换”(explicit coercion)来区分。<br>—— 引用自《你不知道的JS 上》</p>
@@ -784,7 +785,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
